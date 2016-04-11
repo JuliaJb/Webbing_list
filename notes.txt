@@ -1,0 +1,44 @@
+LINE 77 ERRORS DIV      
+
+<?php 
+                    if ($firstLoginErrors)
+                    {
+                        foreach ($firstLoginErrors as $key => $value) 
+                        {
+                        ?>
+                            <div class="errors">
+                                <ul class="errors">
+                                    <li><?= $value ?></li>
+                                </ul>
+                            </div>
+                        <?php
+                        }              
+                    }
+                    ?>
+
+
+FUNCTION CHCK
+
+foreach ($_POST as $key => $value) 
+		{
+			if ($key == 'btnContinue')
+			{
+				continue;
+			}
+			elseif (empty($_POST[$key]))
+			{
+				$firstLoginErrors[] = $key." est vide.";
+			}
+		}
+		return $firstLoginErrors;
+
+		//S'il y a erreures, retour vers formulaire
+		if ($firstLoginErrors)
+		{
+			header('/webbing/index.php');
+		}
+		//sans erreurs, lancer la fonction pour authentification
+		else
+		{	
+			get_users_firstConnection($_POST['prenom'], $_POST['nom']);
+		}

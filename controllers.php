@@ -14,7 +14,7 @@ function form_login_show()
 function form_firstLogin_post_action()
 {
 
-	echo "I am the form_firstLogin_post_action function";
+	$firstLoginErrors = array();
 
 	foreach ($_POST as $key => $value) 
 	{
@@ -24,13 +24,22 @@ function form_firstLogin_post_action()
 		}
 		elseif (empty($_POST[$key]))
 		{
-			$firstLoginErrors[] = $key." est vide.";
+			$firstLoginErrors[] = $key." est vide ";
 		}
-	}	
+	}
 
-	echo "<pre>";
-	print_r($firstLoginErrors);
-	echo "</pre>";
+	if ($firstLoginErrors)
+	{
+		require 'templates/form_login.php';
+	}	
+	else
+	{
+		get_users_firstConnection($_POST['nom'], $_POST['prenom']);
+		echo "I am back";
+		echo "<pre>";
+		print_r($firstUser);
+		echo "</pre>";
+	}
 
 }
 

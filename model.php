@@ -50,6 +50,8 @@ function get_users_firstConnection($nom, $prenom)
 	$result->bindValue(":prenom", $prenom);
 	$result->execute();
 	$firstUser = $result->fetch(PDO::FETCH_ASSOC);
+	close_database_connection($link);
+	return $firstUser;
 
 }
 

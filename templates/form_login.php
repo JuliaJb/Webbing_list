@@ -32,11 +32,27 @@
 
 <!-- DIV pour affichage d'erreures -->
 
+          <?php
+          if ($firstLoginErrors)
+          {
+            foreach ($firstLoginErrors as $key => $value) 
+            {
+            ?>
+                <div class="errors">
+                  <ul class="errors">
+                      <li><?= $value ?></li>
+                  </ul>
+                </div>
+            <?php
+            }
+          }
+          ?>
+
               
 
 
 <!-- Formulaire Premiere Connexion -->
-                    <form class="form-horizontal" method="POST" action="/webbing/index.php/login">
+          <form class="form-horizontal" method="POST" action="/index.php/login">
 					  <div class="form-group">
 					    <label for="inputPrenom" class="col-sm-2 control-label">Votre Prénom</label>
 					    <div class="col-sm-10">

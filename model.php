@@ -27,7 +27,6 @@ function close_database_connection($dbh) {
 
 
 function get_all_users() {
-
 	$link = open_database_connection();
 	$result = $link->query('SELECT * FROM users');
 	$users = array();
@@ -41,6 +40,7 @@ function get_all_users() {
 	//id, nom, prenom, mail, password, enfant, aliments, rsvp
 }
 
+//Fonction pour la connexion pour la première fois
 function get_users_firstConnection($nom, $prenom)
 {
 	$link = open_database_connection();
@@ -49,10 +49,12 @@ function get_users_firstConnection($nom, $prenom)
 	$result->bindValue(":nom", $nom);
 	$result->bindValue(":prenom", $prenom);
 	$result->execute();
-	$firstUser = $result->fetch(PDO::FETCH_ASSOC);
+	while ($row = $result->fetch(PDO::FETCH_ASSOC))
+	{
+		$firstUser[] = $row;
+	}
 	close_database_connection($link);
 	return $firstUser;
-
 }
 
 

@@ -34,11 +34,17 @@ function form_firstLogin_post_action()
 	}	
 	else
 	{
-		get_users_firstConnection($_POST['nom'], $_POST['prenom']);
-		echo "I am back";
-		echo "<pre>";
-		print_r($firstUser);
-		echo "</pre>";
+		$firstUser = get_users_firstConnection($_POST['nom'], $_POST['prenom']);
+		if ($firstUser)
+		{
+			header('location: /index.php/admin');
+		}
+		else
+		{
+			echo "<br> USER NOT FOUND";
+
+		}
+
 	}
 
 }

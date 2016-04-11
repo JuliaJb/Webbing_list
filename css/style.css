@@ -24,3 +24,33 @@ body {
 	margin: 0 auto;
 	text-align: center;
 }
+
+/* === CSS ADRIANA === */
+
+/*form_login*/
+.login-inline {
+	width: 49%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.login-inline>fieldset {
+	max-width: 400px;
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.login-inline:first-child{
+	border-right: 2px solid #ccc;
+}
+
+.p-form {
+	font-size: 1.5rem;
+	font-weight: 300;
+	text-align: center;
+}
+
+
+
+/* === FIN CSS ADRIANA ===*/

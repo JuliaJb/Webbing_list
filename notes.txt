@@ -1,20 +1,27 @@
-LINE 77 ERRORS DIV      
+<?php
 
-<?php 
-                    if ($firstLoginErrors)
-                    {
-                        foreach ($firstLoginErrors as $key => $value) 
-                        {
-                        ?>
-                            <div class="errors">
-                                <ul class="errors">
-                                    <li><?= $value ?></li>
-                                </ul>
-                            </div>
-                        <?php
-                        }              
-                    }
-                    ?>
+//CONTROLLER
+function list_action() {
+	$posts = get_all_posts();
+	require 'templates/list.php';
+}
+
+function show_action($id) {
+	$post = get_post_by_id($id);
+	require 'templates/show.php';
+}
+
+
+function get_all_posts() {
+	$link = open_database_connection();
+	$result = $link->query("SELECT id, titre FROM posts");
+	$posts = array();
+	while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+		$posts[] = $row;
+	}
+	close_database_connection($link);
+	return $posts;
+}
 
 
 FUNCTION CHCK

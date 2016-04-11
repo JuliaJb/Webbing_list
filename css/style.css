@@ -1,3 +1,26 @@
 body {
 	background: #cfd8dc;
 }
+
+.circle {
+	border: 1px solid #999999;
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+	border-radius: 50%;
+	text-align: center;
+	/*line-height: 50px;*/
+	padding-top: 16px;
+}
+
+.stat {
+	width: 30%;
+	text-align: center;
+	display: inline-block;
+}
+
+.stats {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+}

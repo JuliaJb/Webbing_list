@@ -34,6 +34,19 @@ function form_firstLogin_post_action()
 
 }
 
+function form_email()
+{
+	require 'templates/form_admin.php';
+
+	// if (isset($_POST['envoyer'])) 
+	// {
+	// 	envoi_email();
+		
+	// 	echo $users['mail'];
+	// }
+
+}
+
 
 
 ?>

@@ -14,6 +14,11 @@ elseif ('/index.php/login' === $uri && isset($_POST['btnContinue']))
 {
     form_firstLogin_post_action();
 }
+elseif ('/index.php/profile' === $uri ) 
+{
+    form_profileChange_show();
+    form_changeProfile_post_action();
+}
 elseif ('/index.php/admin' === $uri ) 
 {
     form_email();

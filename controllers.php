@@ -11,6 +11,7 @@ function form_login_show()
 
 }
 
+//Fonction Connexion Premiere Fois
 function form_firstLogin_post_action()
 {
 
@@ -37,7 +38,7 @@ function form_firstLogin_post_action()
 		$firstUser = get_users_firstConnection($_POST['nom'], $_POST['prenom']);
 		if ($firstUser)
 		{
-			header('location: /index.php/admin');
+			header('location: /index.php/profile');
 		}
 		else
 		{
@@ -48,6 +49,22 @@ function form_firstLogin_post_action()
 	}
 
 }
+
+//Fonction Montrer Page pour Changement Profile:
+function form_profileChange_show()
+{
+	require 'templates/form_changeProfile.php';
+}
+
+//Fonction Changement de Profil
+ function form_changeProfile_post_action()
+ {
+ 	echo "This is form change profile post action function";
+ }
+
+
+
+
 
 function form_email()
 {

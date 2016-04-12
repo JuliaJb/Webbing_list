@@ -23,6 +23,10 @@ elseif ('/index.php/admin' === $uri )
 {
     form_email();
 }
+elseif ('/index.php/email' === $uri ) 
+{
+    form_email_action();
+}
 elseif ('/index.php/home' === $uri ) 
 {
     echo "Ici c'est la home";

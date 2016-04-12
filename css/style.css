@@ -1,3 +1,5 @@
+/* === FIN CSS JULIA === */
+
 body {
 	background: #cfd8dc;
 }
@@ -9,7 +11,6 @@ body {
 	margin: 0 auto;
 	border-radius: 50%;
 	text-align: center;
-	/*line-height: 50px;*/
 	padding-top: 16px;
 }
 
@@ -24,6 +25,21 @@ body {
 	margin: 0 auto;
 	text-align: center;
 }
+
+
+.table-hover, .table-hover th {
+	text-align: center;
+}
+
+.infos_invite {
+	font-size: 10px;
+}
+
+.grey {
+	background-color: #cfd8dc;
+}
+
+/* === FIN CSS JULIA === */
 
 /* === CSS ADRIANA === */
 

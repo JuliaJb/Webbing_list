@@ -16,6 +16,15 @@
 			<div class="box">
 				<div class="col-lg-12">
 					
+
+<!-- Formulaire Premiere Connexion -->
+<!-- names: ['prenom']['nom']['code']['btnContinue'] -->
+          <form class="form-horizontal login-inline" method="POST" action="/index.php/login">
+            <hr>
+            <h2 class="intro-text text-center">Prémière Connexion</h2>
+            <hr>
+            <hr class="visible-xs">
+            <p class="p-form">Créez votre espace utilisateur ici.</p>
 <!-- DIV pour affichage d'erreures -->
           <?php
           if ($firstLoginErrors)
@@ -32,16 +41,6 @@
             }
           }
           ?>
-
-<!-- Formulaire Premiere Connexion -->
-<!-- names: ['prenom']['nom']['code']['btnContinue'] -->
-          <form class="form-horizontal login-inline" method="POST" action="/index.php/login">
-            <hr>
-            <h2 class="intro-text text-center">Prémière Connexion</h2>
-            <hr>
-            <hr class="visible-xs">
-            <p class="p-form">Créez votre espace utilisateur ici.</p>
-
             <fieldset>
               <div class="form-group">
                 <div class="col-sm-10">

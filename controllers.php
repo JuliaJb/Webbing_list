@@ -55,6 +55,7 @@ function form_login_post_action()
 {
 	if (isset($_POST['btnLogin']))
 	{
+		
 		$loginErrs = array();
 
 		//Gestion d'erreures
@@ -69,7 +70,7 @@ function form_login_post_action()
 				$loginErrs[] = $key." est vide";
 			}
 		}//end foreach
-		
+
 		if ($loginErrs)
 		{
 			require 'templates/form_login.php';

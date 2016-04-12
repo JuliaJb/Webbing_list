@@ -41,8 +41,8 @@
             <fieldset>
 
               <div class="inputs">
-                <input type="text" class="form-control input-space" name="prenom" value="" placeholder="Prénom" id="">
-                <input type="text" class="form-control input-space" name="nom" value="" placeholder="Nom" id="">
+                <input type="text" class="form-control input-space" name="prenom" value="<?= $_SESSION['user']['prenom'] ?>" placeholder="Prénom" id="">
+                <input type="text" class="form-control input-space" name="nom" value="<?= $_SESSION['user']['nom'] ?>" placeholder="Nom" id="">
                 <input type="email" class="form-control input-space" name="email" value="" placeholder="Email" id="">
                 <input type="password" class="form-control input-space" name="password" value="" placeholder="Mot de Passe" id="">
               </div>
@@ -50,15 +50,15 @@
               <div class="checkboxy">
                 <label for="">RSVP</label><br>
                 <p class="p-formProfile">Pouvez vous nous rejoindre le jour de notre mariage?</p>
-                <input type="checkbox" name="rsvp" value="0">Oui
-                <input type="checkbox" name="rsvp" value="1">Non
+                <input type="checkbox" name="rsvp" value="1">Oui
+                <input type="checkbox" name="rsvp" value="0">Non
               </div>
               
               <div class="checkboxy">
                 <label for="">Régime Alimentaire</label><br>
                 <p class="p-formProfile">Avez-vous des allergies alimentaires ou un régime alimentaire spécifique?</p>
-                <input type="checkbox" name="regime" value="0">Oui
-                <input type="checkbox" name="regime" value="1">Non
+                <input type="checkbox" name="regime" value="1">Oui
+                <input type="checkbox" name="regime" value="0">Non
               </div>
               
               <div class="checkboxy">

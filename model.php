@@ -64,21 +64,29 @@ function get_users_firstConnection($nom, $prenom)
 	//[aliments][rsvp])
 
 
-//Fonction pour créer son profil
+//Fonction pour créer son profil 
 // names: ['prenom'] ['nom'] ['email']['password']
 //['rsvp']['regime']['enfants'] ['btnCreateProfile']
-function update_user_names($id, $nom, $prenom) 
+function update_user_data($id, $nom, $prenom, $mail, $password, $enfant, $aliments, $rsvp) 
 {
 	$link = open_database_connection();
-	$sql = "UPDATE users SET nom= :nom, prenom= :prenom WHERE id = :id ";
+	$sql = "UPDATE `users` SET `nom`= :nom,`prenom`= :prenom, `mail`= :mail, `password`= :password, `enfant`= :enfant, `aliments`= :aliments, `rsvp`= :rsvp WHERE id= :id";
 	$result = $link->prepare($sql);
 	$result->bindValue(":nom", $nom);
 	$result->bindValue(":prenom", $prenom);
+	$result->bindValue(":mail", $mail);
+	$result->bindValue(":password", $password);
+	$result->bindValue(":enfant", $enfant);
+	$result->bindValue(":aliments", $aliments);
+	$result->bindValue(":rsvp", $rsvp);
 	$result->bindValue(":id", $id);
 	$result->execute();
 	close_database_connection($link);
 	return "update done";
 }
+
+
+
 
 
 

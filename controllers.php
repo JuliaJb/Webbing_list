@@ -102,7 +102,7 @@ function form_profileChange_show()
 		}
 		else
 		{
-			$updateUser = update_user_names($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom']);
+			$updateUser = update_user_data($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['enfants'], $_POST['regime'], $_POST['rsvp']);
 			header('Location: /');
 		}
 

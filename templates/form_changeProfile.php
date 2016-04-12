@@ -50,21 +50,23 @@
               <div class="checkboxy">
                 <label for="">RSVP</label><br>
                 <p class="p-formProfile">Pouvez vous nous rejoindre le jour de notre mariage?</p>
-                <input type="checkbox" name="rsvp" value="1">Oui
-                <input type="checkbox" name="rsvp" value="0">Non
+                <input type="radio" name="rsvp" value="1">Oui
+                <input type="radio" name="rsvp" value="0">Non
               </div>
               
               <div class="checkboxy">
                 <label for="">Régime Alimentaire</label><br>
                 <p class="p-formProfile">Avez-vous des allergies alimentaires ou un régime alimentaire spécifique?</p>
-                <input type="checkbox" name="regime" value="1">Oui
-                <input type="checkbox" name="regime" value="0">Non
+                <input type="radio" name="regime" value="1">Oui
+                <input type="radio" name="regime" value="0">Non
               </div>
+              <textarea name="aliment_specs" id="" cols="30" rows="10"></textarea>
+
               
               <div class="checkboxy">
                 <label for="">Enfants</label><br>
-                <input type="checkbox" name="enfants" value="0">Oui
-                <input type="checkbox" name="enfants" value="1">Non
+                <input type="radio" name="enfants" value="0">Oui
+                <input type="radio" name="enfants" value="1">Non
               </div>
 
               <button name="btnCreateProfile" id="btnChangeId" class="btn btn-default">Créer Profil</button>

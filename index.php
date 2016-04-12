@@ -22,6 +22,10 @@ elseif ('/index.php/login' === $uri && isset($_POST['btnContinue']))
 {
     form_firstLogin_post_action();
 }
+elseif ('/index.php/login' === $uri && isset($_POST['btnLogin'])) 
+{
+    form_login_post_action();
+}
 elseif ('/index.php/profile' === $uri ) 
 {
     form_profileChange_show();

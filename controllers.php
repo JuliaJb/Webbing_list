@@ -50,6 +50,47 @@ function form_firstLogin_post_action()
 	}
 }
 
+//Fonction Login
+function form_login_post_action()
+{
+	if (isset($_POST['btnLogin']))
+	{
+		$loginErrs = array();
+
+		//Gestion d'erreures
+		foreach ($_POST as $key => $value) 
+		{
+			if ($key == 'btnLogin')
+			{
+				continue;
+			}
+			elseif (empty($key))
+			{
+				$loginErrs[] = $key." est vide";
+			}
+		}//end foreach
+		
+		if ($loginErrs)
+		{
+			require 'templates/form_login.php';
+		}	
+		// else
+		// {
+		// 	$loginUser = get_users_login($_POST['email'], $_POST['password']);
+		// 	if ($loginUser)
+		// 	{
+		// 		header('location: /');
+		// 	}
+		// 	else
+		// 	{
+		// 		$loginErrs[] = "Email ou Mot de Passe incorrects. Veuillez réessayer.";
+		// 		require 'templates/form_login.php';
+		// 	}
+		// }
+
+	}//end first if condition
+}//function end
+
 //Fonction Montrer Page pour Changement Profile:
 function form_profileChange_show()
 {
@@ -102,7 +143,7 @@ function form_profileChange_show()
 		}
 		else
 		{
-			$updateUser = update_user_data($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['enfants'], $_POST['regime'], $_POST['rsvp']);
+			$updateUser = update_user_data($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['enfants'], $_POST['regime'], $_POST['rsvp'], $_POST['aliment_specs']);
 			header('Location: /');
 		}
 

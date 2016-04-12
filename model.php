@@ -67,10 +67,10 @@ function get_users_firstConnection($nom, $prenom)
 //Fonction pour créer son profil 
 // names: ['prenom'] ['nom'] ['email']['password']
 //['rsvp']['regime']['enfants'] ['btnCreateProfile']
-function update_user_data($id, $nom, $prenom, $mail, $password, $enfant, $aliments, $rsvp) 
+function update_user_data($id, $nom, $prenom, $mail, $password, $enfant, $aliments, $rsvp, $aliment_specs) 
 {
 	$link = open_database_connection();
-	$sql = "UPDATE `users` SET `nom`= :nom,`prenom`= :prenom, `mail`= :mail, `password`= :password, `enfant`= :enfant, `aliments`= :aliments, `rsvp`= :rsvp WHERE id= :id";
+	$sql = "UPDATE `users` SET `nom`= :nom,`prenom`= :prenom, `mail`= :mail, `password`= :password, `enfant`= :enfant, `aliments`= :aliments, `rsvp`= :rsvp,`aliment_specs`=:aliment_specs WHERE id= :id";
 	$result = $link->prepare($sql);
 	$result->bindValue(":nom", $nom);
 	$result->bindValue(":prenom", $prenom);
@@ -79,12 +79,29 @@ function update_user_data($id, $nom, $prenom, $mail, $password, $enfant, $alimen
 	$result->bindValue(":enfant", $enfant);
 	$result->bindValue(":aliments", $aliments);
 	$result->bindValue(":rsvp", $rsvp);
+	$result->bindValue(":aliment_specs", $aliment_specs);
 	$result->bindValue(":id", $id);
 	$result->execute();
 	close_database_connection($link);
 	return "update done";
 }
 
+//Fonction pour le Login
+function get_users_login($email, $password)
+{
+	$link = open_database_connection();
+	$sql = "SELECT `id` FROM `users` WHERE `mail` like :email AND `password` like :password";
+	$result = $link->prepare($sql);
+	$result->bindValue(":email", $email);
+	$result->bindValue(":password", $password);
+	$result->execute();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC))
+	{
+		$loginUser[] = $row;
+	}
+	close_database_connection($link);
+	$_SESSION['user']['id'] = $loginUser[0]['id'];
+}
 
 
 

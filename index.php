@@ -9,7 +9,14 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 //echo "<small>route = $uri</small><br>";
 if('/index.php' === $uri || '/' === $uri ) 
 {
-    form_login_show();
+    if (isset($_SESSION['user'])) 
+    {
+        homepage_show();
+    }
+    else
+    {
+        form_login_show();
+    }
 } 
 elseif ('/index.php/login' === $uri && isset($_POST['btnContinue'])) 
 {
@@ -29,7 +36,7 @@ elseif ('/index.php/admin' === $uri )
 }
 elseif ('/index.php/home' === $uri ) 
 {
-    echo "Ici c'est la home";
+    homepage_show();
 }
 elseif ('/index.php/profil' === $uri ) 
 {
@@ -49,7 +56,7 @@ elseif ('/index.php/info' === $uri )
 }
 elseif ('/index.php/deconnexion' === $uri ) 
 {
-    echo "Ici c'est deconnexion";
+    deconnexion();
 }
 else 
 {

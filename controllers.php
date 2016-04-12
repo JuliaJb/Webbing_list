@@ -103,7 +103,7 @@ function form_profileChange_show()
 		else
 		{
 			$updateUser = update_user_names($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom']);
-			header('Location: http://www.google.com');
+			header('Location: /');
 		}
 
 
@@ -111,6 +111,18 @@ function form_profileChange_show()
  }//end function
 
 
+//Fonction afficher homepage
+ function homepage_show()
+ {
+ 	require 'templates/home.php';
+ }
+
+ //Fonction Deconnexion
+ function deconnexion()
+ {
+ 	unset($_SESSION['user']);
+ 	header('Location: /');
+ }
 
 
 

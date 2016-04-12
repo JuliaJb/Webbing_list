@@ -14,40 +14,40 @@ function form_login_show()
 //Fonction Connexion Premiere Fois
 function form_firstLogin_post_action()
 {
-
 	$firstLoginErrors = array();
 
-	foreach ($_POST as $key => $value) 
+	if (isset($_POST['btnContinue']))
 	{
-		if ($key == 'btnContinue')
+		foreach ($_POST as $key => $value) 
 		{
-			continue;
+			if ($key == 'btnContinue')
+			{
+				continue;
+			}
+			elseif (empty($_POST[$key]))
+			{
+				$firstLoginErrors[] = $key." est vide ";
+			}
 		}
-		elseif (empty($_POST[$key]))
-		{
-			$firstLoginErrors[] = $key." est vide ";
-		}
-	}
 
-	if ($firstLoginErrors)
-	{
-		require 'templates/form_login.php';
-	}	
-	else
-	{
-		$firstUser = get_users_firstConnection($_POST['nom'], $_POST['prenom']);
-		if ($firstUser)
+		if ($firstLoginErrors)
 		{
-			header('location: /index.php/profile');
-		}
+			require 'templates/form_login.php';
+		}	
 		else
 		{
-			echo "<br> USER NOT FOUND";
-
+			$firstUser = get_users_firstConnection($_POST['nom'], $_POST['prenom']);
+			if ($firstUser)
+			{
+				header('location: /index.php/profile');
+			}
+			else
+			{
+				$firstLoginErrors[] = "Votre Nom et Prénom ne sont pas dans la liste d'invités. Vérifiez l'orthographe et réessayez.";
+				require 'templates/form_login.php';
+			}
 		}
-
 	}
-
 }
 
 //Fonction Montrer Page pour Changement Profile:
@@ -56,11 +56,59 @@ function form_profileChange_show()
 	require 'templates/form_changeProfile.php';
 }
 
-//Fonction Changement de Profil
+//Fonction Création de Profil
+ 
  function form_changeProfile_post_action()
  {
- 	echo "This is form change profile post action function";
- }
+	
+	$profileCreateErr = array();
+ 	if (isset($_POST['btnCreateProfile']))
+ 	{
+ 		//Vérification Champs obligatoires remplis
+ 		if (!isset($_POST['rsvp']))
+		{
+			$profileCreateErr[] = "Vous devez confirmer votre réservation, s'il vous plâit.";
+		}
+ 		foreach ($_POST as $key => $value) 
+ 		{
+ 			if ($key == 'regime')
+ 			{
+ 				continue;
+ 			}
+ 			elseif ($key == 'enfants')
+ 			{
+ 				continue;
+ 			}
+ 			elseif ($key == 'btnCreateProfile')
+ 			{
+ 				continue;
+ 			}
+ 			elseif ($key == 'rsvp')
+ 			{
+ 				continue;
+ 			}
+ 			elseif (empty($_POST[$key])) 
+ 			{
+ 				$profileCreateErr[] = $key." est vide";
+ 			}
+ 		}//end foreach
+
+ 		//Sans erreurs, on passe aux fonctions 
+ 		//concernant la base de données
+ 		if ($profileCreateErr)
+		{
+			require 'templates/form_changeProfile.php';
+			echo "there is an error with profileCreateErr";
+		}
+		else
+		{
+			$updateUser = update_user_names($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom']);
+			header('Location: http://www.google.com');
+		}
+
+
+ 	}//end first condition
+ }//end function
 
 
 

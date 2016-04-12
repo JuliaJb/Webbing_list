@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require_once 'model.php';
 require_once 'controllers.php';
 
@@ -17,6 +18,9 @@ elseif ('/index.php/login' === $uri && isset($_POST['btnContinue']))
 elseif ('/index.php/profile' === $uri ) 
 {
     form_profileChange_show();
+}
+elseif ('/index.php/profile_change' === $uri && isset($_POST['btnCreateProfile'])) 
+{
     form_changeProfile_post_action();
 }
 elseif ('/index.php/admin' === $uri ) 

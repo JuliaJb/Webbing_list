@@ -44,21 +44,18 @@
 
             <fieldset>
               <div class="form-group">
-                <label for="inputPrenom" class="col-sm-2 control-label">Votre Prénom</label>
                 <div class="col-sm-10">
                   <input type="text" name="prenom" class="form-control" id="inputPrenom" placeholder="Prénom">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="inputNom" class="col-sm-2 control-label">Votre Nom Famille</label>
                 <div class="col-sm-10">
                   <input type="text" name="nom" class="form-control" id="inputNom" placeholder="Nom">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="inputCode" class="col-sm-2 control-label">Code d'Accès</label>
                 <div class="col-sm-10">
                   <input type="text" name="code" class="form-control" id="inputCode" placeholder="Code d'Acces">
                 </div>

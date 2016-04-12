@@ -1,11 +1,11 @@
 <?php
 
-function open_database_connection() {
-	define('DB_HOST', 'localhost');
-	define('DB_NAME', 'webbing');
-	define('DB_USER', 'webbing');
-	define('DB_PASSWORD', 'webbing');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'webbing');
+define('DB_USER', 'webbing');
+define('DB_PASSWORD', 'webbing');
 
+function open_database_connection() {
 
 	try 
 	{
@@ -44,7 +44,7 @@ function get_all_users() {
 function get_users_firstConnection($nom, $prenom)
 {
 	$link = open_database_connection();
-	$sql = "SELECT `nom`, `prenom` FROM `users` WHERE `nom` like :nom AND `prenom` like :prenom";
+	$sql = "SELECT * FROM `users` WHERE `nom` like :nom AND `prenom` like :prenom";
 	$result = $link->prepare($sql);
 	$result->bindValue(":nom", $nom);
 	$result->bindValue(":prenom", $prenom);
@@ -54,8 +54,32 @@ function get_users_firstConnection($nom, $prenom)
 		$firstUser[] = $row;
 	}
 	close_database_connection($link);
+	$_SESSION['user']['id'] = $firstUser[0]['id'];
+	$_SESSION['user']['prenom'] = $firstUser[0]['prenom'];
+	$_SESSION['user']['nom'] = $firstUser[0]['nom'];
 	return $firstUser;
 }
+	//$firstUser = Array ( [0]=> Array ([id])
+	//[nom][prenom][mail][password][enfants]
+	//[aliments][rsvp])
+
+
+//Fonction pour créer son profil
+// names: ['prenom'] ['nom'] ['email']['password']
+//['rsvp']['regime']['enfants'] ['btnCreateProfile']
+function update_user_names($id, $nom, $prenom) 
+{
+	$link = open_database_connection();
+	$sql = "UPDATE users SET nom= :nom, prenom= :prenom WHERE id = :id ";
+	$result = $link->prepare($sql);
+	$result->bindValue(":nom", $nom);
+	$result->bindValue(":prenom", $prenom);
+	$result->bindValue(":id", $id);
+	$result->execute();
+	close_database_connection($link);
+	return "update done";
+}
+
 
 
 

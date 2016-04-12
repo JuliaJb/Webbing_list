@@ -14,41 +14,82 @@ function form_login_show()
 //Fonction Connexion Premiere Fois
 function form_firstLogin_post_action()
 {
-
 	$firstLoginErrors = array();
 
-	foreach ($_POST as $key => $value) 
+	if (isset($_POST['btnContinue']))
 	{
-		if ($key == 'btnContinue')
+		foreach ($_POST as $key => $value) 
 		{
-			continue;
+			if ($key == 'btnContinue')
+			{
+				continue;
+			}
+			elseif (empty($_POST[$key]))
+			{
+				$firstLoginErrors[] = $key." est vide ";
+			}
 		}
-		elseif (empty($_POST[$key]))
-		{
-			$firstLoginErrors[] = $key." est vide ";
-		}
-	}
 
-	if ($firstLoginErrors)
-	{
-		require 'templates/form_login.php';
-	}	
-	else
-	{
-		$firstUser = get_users_firstConnection($_POST['nom'], $_POST['prenom']);
-		if ($firstUser)
+		if ($firstLoginErrors)
 		{
-			header('location: /index.php/profile');
-		}
+			require 'templates/form_login.php';
+		}	
 		else
 		{
-			echo "<br> USER NOT FOUND";
-
+			$firstUser = get_users_firstConnection($_POST['nom'], $_POST['prenom']);
+			if ($firstUser)
+			{
+				header('location: /index.php/profile');
+			}
+			else
+			{
+				$firstLoginErrors[] = "Votre Nom et Prénom ne sont pas dans la liste d'invités. Vérifiez l'orthographe et réessayez.";
+				require 'templates/form_login.php';
+			}
 		}
-
 	}
-
 }
+
+//Fonction Login
+function form_login_post_action()
+{
+	if (isset($_POST['btnLogin']))
+	{
+		$loginErrs = array();
+
+		//Gestion d'erreures
+		foreach ($_POST as $key => $value) 
+		{
+			if ($key == 'btnLogin')
+			{
+				continue;
+			}
+			elseif (empty($key))
+			{
+				$loginErrs[] = $key." est vide";
+			}
+		}//end foreach
+		
+		if ($loginErrs)
+		{
+			require 'templates/form_login.php';
+		}	
+		// else
+		// {
+		// 	$loginUser = get_users_login($_POST['email'], $_POST['password']);
+		// 	if ($loginUser)
+		// 	{
+		// 		header('location: /');
+		// 	}
+		// 	else
+		// 	{
+		// 		$loginErrs[] = "Email ou Mot de Passe incorrects. Veuillez réessayer.";
+		// 		require 'templates/form_login.php';
+		// 	}
+		// }
+
+	}//end first if condition
+}//function end
 
 //Fonction Montrer Page pour Changement Profile:
 function form_profileChange_show()
@@ -56,13 +97,73 @@ function form_profileChange_show()
 	require 'templates/form_changeProfile.php';
 }
 
-//Fonction Changement de Profil
+//Fonction Création de Profil
+ 
  function form_changeProfile_post_action()
  {
- 	echo "This is form change profile post action function";
+	
+	$profileCreateErr = array();
+ 	if (isset($_POST['btnCreateProfile']))
+ 	{
+ 		//Vérification Champs obligatoires remplis
+ 		if (!isset($_POST['rsvp']))
+		{
+			$profileCreateErr[] = "Vous devez confirmer votre réservation, s'il vous plâit.";
+		}
+ 		foreach ($_POST as $key => $value) 
+ 		{
+ 			if ($key == 'regime')
+ 			{
+ 				continue;
+ 			}
+ 			elseif ($key == 'enfants')
+ 			{
+ 				continue;
+ 			}
+ 			elseif ($key == 'btnCreateProfile')
+ 			{
+ 				continue;
+ 			}
+ 			elseif ($key == 'rsvp')
+ 			{
+ 				continue;
+ 			}
+ 			elseif (empty($_POST[$key])) 
+ 			{
+ 				$profileCreateErr[] = $key." est vide";
+ 			}
+ 		}//end foreach
+
+ 		//Sans erreurs, on passe aux fonctions 
+ 		//concernant la base de données
+ 		if ($profileCreateErr)
+		{
+			require 'templates/form_changeProfile.php';
+			echo "there is an error with profileCreateErr";
+		}
+		else
+		{
+			$updateUser = update_user_data($_SESSION['user']['id'], $_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['password'], $_POST['enfants'], $_POST['regime'], $_POST['rsvp'], $_POST['aliment_specs']);
+			header('Location: /');
+		}
+
+
+ 	}//end first condition
+ }//end function
+
+
+//Fonction afficher homepage
+ function homepage_show()
+ {
+ 	require 'templates/home.php';
  }
 
-
+ //Fonction Deconnexion
+ function deconnexion()
+ {
+ 	unset($_SESSION['user']);
+ 	header('Location: /');
+ }
 
 
 

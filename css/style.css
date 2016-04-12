@@ -68,8 +68,37 @@ body {
 }
 
 /*form_changeProfile*/
-.input-spaced {
+.input-space {
 	margin: 10px 0;
+}
+
+#changeProfile>fieldset {
+	border: 2px solid #fff;
+	max-width: 500px;
+	margin: 0 auto;
+	display: block;
+}
+
+.inputs {
+	max-width: 400px;
+	display: block;
+	margin: 0 auto;
+}
+
+.checkboxy {
+	margin: 20px 0;
+}
+
+.p-formProfile {
+	font-size: 1.2rem;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+#btnChangeId {
+	display: block;
+	margin: 0 auto;
 }
 
 

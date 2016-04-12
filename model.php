@@ -1,9 +1,10 @@
 <?php
 
-	define('DB_HOST', 'localhost');
-	define('DB_NAME', 'webbing');
-	define('DB_USER', 'webbing');
-	define('DB_PASSWORD', 'webbing');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'webbing');
+define('DB_USER', 'webbing');
+define('DB_PASSWORD', 'webbing');
+
 
 function open_database_connection() {
 
@@ -44,7 +45,7 @@ function get_all_users() {
 function get_users_firstConnection($nom, $prenom)
 {
 	$link = open_database_connection();
-	$sql = "SELECT `nom`, `prenom` FROM `users` WHERE `nom` like :nom AND `prenom` like :prenom";
+	$sql = "SELECT * FROM `users` WHERE `nom` like :nom AND `prenom` like :prenom";
 	$result = $link->prepare($sql);
 	$result->bindValue(":nom", $nom);
 	$result->bindValue(":prenom", $prenom);
@@ -54,8 +55,57 @@ function get_users_firstConnection($nom, $prenom)
 		$firstUser[] = $row;
 	}
 	close_database_connection($link);
+	$_SESSION['user']['id'] = $firstUser[0]['id'];
+	$_SESSION['user']['prenom'] = $firstUser[0]['prenom'];
+	$_SESSION['user']['nom'] = $firstUser[0]['nom'];
 	return $firstUser;
 }
+	//$firstUser = Array ( [0]=> Array ([id])
+	//[nom][prenom][mail][password][enfants]
+	//[aliments][rsvp])
+
+
+//Fonction pour créer son profil 
+// names: ['prenom'] ['nom'] ['email']['password']
+//['rsvp']['regime']['enfants'] ['btnCreateProfile']
+function update_user_data($id, $nom, $prenom, $mail, $password, $enfant, $aliments, $rsvp, $aliment_specs) 
+{
+	$link = open_database_connection();
+	$sql = "UPDATE `users` SET `nom`= :nom,`prenom`= :prenom, `mail`= :mail, `password`= :password, `enfant`= :enfant, `aliments`= :aliments, `rsvp`= :rsvp,`aliment_specs`=:aliment_specs WHERE id= :id";
+	$result = $link->prepare($sql);
+	$result->bindValue(":nom", $nom);
+	$result->bindValue(":prenom", $prenom);
+	$result->bindValue(":mail", $mail);
+	$result->bindValue(":password", $password);
+	$result->bindValue(":enfant", $enfant);
+	$result->bindValue(":aliments", $aliments);
+	$result->bindValue(":rsvp", $rsvp);
+	$result->bindValue(":aliment_specs", $aliment_specs);
+	$result->bindValue(":id", $id);
+	$result->execute();
+	close_database_connection($link);
+	return "update done";
+}
+
+//Fonction pour le Login
+function get_users_login($email, $password)
+{
+	$link = open_database_connection();
+	$sql = "SELECT `id` FROM `users` WHERE `mail` like :email AND `password` like :password";
+	$result = $link->prepare($sql);
+	$result->bindValue(":email", $email);
+	$result->bindValue(":password", $password);
+	$result->execute();
+	while ($row = $result->fetch(PDO::FETCH_ASSOC))
+	{
+		$loginUser[] = $row;
+	}
+	close_database_connection($link);
+	$_SESSION['user']['id'] = $loginUser[0]['id'];
+}
+
+
+
 
 function get_emails_maurice()
 {

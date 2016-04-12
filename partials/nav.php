@@ -20,7 +20,7 @@
                         <a href="/index.php/home">Home</a>
                     </li>
                     <li>
-                        <a href="/index.php/profil">Profil</a>
+                        <a href="/index.php/profile">Profil</a>
                     </li>
                     <li>
                         <a href="/index.php/forum">Forum</a>

@@ -42,8 +42,11 @@
 
               <div class="inputs">
                 <input type="text" class="form-control input-space" name="prenom" value="<?= $_SESSION['user']['prenom'] ?>" placeholder="Prénom" id="">
+                
                 <input type="text" class="form-control input-space" name="nom" value="<?= $_SESSION['user']['nom'] ?>" placeholder="Nom" id="">
-                <input type="email" class="form-control input-space" name="email" value="" placeholder="Email" id="">
+                
+                <input type="email" class="form-control input-space" name="email" value="<?= $_SESSION['user']['email'] ?>" placeholder="Email" id="">
+                
                 <input type="password" class="form-control input-space" name="password" value="" placeholder="Mot de Passe" id="">
               </div>
               
@@ -60,7 +63,7 @@
                 <input type="radio" name="regime" value="1">Oui
                 <input type="radio" name="regime" value="0">Non
               </div>
-              <textarea name="aliment_specs" id="" cols="30" rows="10"></textarea>
+              <textarea name="aliment_specs" id="" cols="30" rows="10"><?= $_SESSION['user']['aliment_specs'] ?></textarea>
 
               
               <div class="checkboxy">

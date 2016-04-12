@@ -38,9 +38,20 @@ elseif ('/index.php/admin' === $uri )
 {
     form_email();
 }
+elseif ('/index.php/email' === $uri ) 
+{
+    form_email_action();
+}
 elseif ('/index.php/home' === $uri ) 
 {
-    homepage_show();
+    if (isset($_SESSION['user'])) 
+    {
+        homepage_show();
+    }
+    else
+    {
+        form_login_show();
+    }
 }
 elseif ('/index.php/profil' === $uri ) 
 {

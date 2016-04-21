@@ -18,7 +18,7 @@
 					
 <!-- DIV pour affichage d'erreures -->
           <?php
-          if ($firstLoginErrors)
+          if (!empty($firstLoginErrors))
           {
             foreach ($firstLoginErrors as $key => $value) 
             {
@@ -81,7 +81,7 @@
               <p class="p-form">Connectez-vous si ous avez déjà créé votre espace utilisteur</p>
   <!-- DIV pour affichage d'erreures Login-->
           <?php
-            if ($loginErrs)
+            if (!empty($loginErrs))
             {
               foreach ($loginErrs as $key => $value) 
               {

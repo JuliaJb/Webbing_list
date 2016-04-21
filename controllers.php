@@ -55,6 +55,7 @@ function form_login_post_action()
 {
 	if (isset($_POST['btnLogin']))
 	{
+		
 		$loginErrs = array();
 
 		//Gestion d'erreures
@@ -64,29 +65,30 @@ function form_login_post_action()
 			{
 				continue;
 			}
-			elseif (empty($key))
+			elseif (empty($_POST[$key]))
 			{
 				$loginErrs[] = $key." est vide";
 			}
 		}//end foreach
-		
+
+
 		if ($loginErrs)
 		{
 			require 'templates/form_login.php';
 		}	
-		// else
-		// {
-		// 	$loginUser = get_users_login($_POST['email'], $_POST['password']);
-		// 	if ($loginUser)
-		// 	{
-		// 		header('location: /');
-		// 	}
-		// 	else
-		// 	{
-		// 		$loginErrs[] = "Email ou Mot de Passe incorrects. Veuillez réessayer.";
-		// 		require 'templates/form_login.php';
-		// 	}
-		// }
+		else
+		{
+			$loginUser = get_users_login($_POST['email'], $_POST['password']);
+			if ($loginUser)
+			{
+				header('location: /');
+			}
+			else
+			{
+				$loginErrs[] = "Email ou Mot de Passe incorrects. Veuillez réessayer.";
+				require 'templates/form_login.php';
+			}
+		}
 
 	}//end first if condition
 }//function end
@@ -166,6 +168,7 @@ function form_profileChange_show()
  }
 
 
+// ------------------ ADMIN
 
 function form_email()
 {
@@ -242,6 +245,12 @@ function envoi_email($subject, $body, $groupeMa, $groupeFr)
 
 function form_email_action()
 {
+
+	$users = get_all_users();
+	$countUsers = count_users();
+	$countAttending = count_attending();
+	$countNotAttending = count_not_attending();
+	$listAttending = list_attending();
 	if (isset($_POST['envoyer'])) 
 	{
 		$emailErrors = [];
@@ -285,6 +294,84 @@ function form_email_action()
 
 
 
+// ------------------ FIN ADMIN
+
+
+// ------------------ INFO
+
+function info_maurice_show()
+{
+
+	require 'templates/info_maurice.php';
+}
+
+
+function info_france_show()
+{
+
+	require 'templates/info_france.php';
+}
+
+
+
+
+// ------------------ FIN INFO
+
+
+// ----------------- FORUM
+
+
+function show_post_by_role($id)
+{
+    $posts = get_all_posts_by_role($id);
+  
+    $roles = get_button_by_role();
+    require 'templates/forum.php';
+}
+
+
+function forum_show()
+{	
+	if (isset($_POST['post'])) {
+		post_question($_SESSION['user']['nom'],$_POST['role'],$_POST['message'],$_POST['titre']);
+	}
+    $posts = get_all_posts_by_role($_SESSION['user']['id']);
+    // changement fonction, mettre le rôle de la session et non l'id
+    $roles = get_button_by_role();
+    var_dump($roles);
+    echo "<br>";
+    var_dump($_SESSION['user']['id']);
+    require 'templates/forum.php';
+}
+
+    
+function show_post_and_reply($id)
+{
+	
+	
+	$posts = get_post_by_id($_SESSION['user']['id']);
+    $reponses = get_rep_by_id($id);
+    $roles = get_button_by_role();   
+    require 'templates/details.php';
+}
+
+
+function traitement_post_question()
+{
+	if (isset($_POST['post'])) {
+    	$roles = get_button_by_role();
+    	require 'templates/post_question.php';
+	}
+}
+
+function traitement_post_reponse()
+{
+	if (isset($_POST['reponse'])) {
+		post_reponse($_GET['id'], $_POST['message'], $_SESSION['user']['id']);
+	}
+}
+
+// ------------ FIN FORUM
 
 
 ?>

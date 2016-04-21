@@ -52,15 +52,35 @@ elseif ('/index.php/profil' === $uri )
 }
 elseif ('/index.php/forum' === $uri ) 
 {
-    echo "Ici c'est forum";
+    if (isset($_GET['id'])) {
+        show_post_by_role($_GET['id']);
+    }else {
+        forum_show();
+    }
+   
 }
+elseif ('/index.php/details' === $uri ) 
+{ 
+    if (isset($_GET['id'])){
+        traitement_post_reponse();
+        show_post_and_reply($_GET['id']); 
+    }
+}
+elseif ('/index.php/post_question' === $uri ) 
+{
+    traitement_post_question();
+}  
 elseif ('/index.php/photo' === $uri ) 
 {
     echo "Ici c'est photo";
 }  
-elseif ('/index.php/info' === $uri ) 
+elseif ('/index.php/infos_maurice' === $uri ) 
 {
-    echo "Ici c'est info";
+    info_maurice_show();
+}
+elseif ('/index.php/infos_france' === $uri ) 
+{
+    info_france_show();
 }
 elseif ('/index.php/deconnexion' === $uri ) 
 {

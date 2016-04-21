@@ -12,7 +12,7 @@
     <title><?= $title ?></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="/css/business-casual.css" rel="stylesheet">
@@ -32,8 +32,7 @@
 </head>
 
 <body>
-<div class="brand">Marcus et Ginette</div>
-    <div class="address-bar">3481 Melrose Place | Roubaix, France | 123.456.7890</div>
+<div class="brand"><a class="lien" href="/index.php/home">Marcus et Ginette</a></div>
 
     <?php include 'partials/nav.php'; ?>
 

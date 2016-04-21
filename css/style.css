@@ -4,6 +4,15 @@ body {
 	background: #cfd8dc;
 }
 
+.brand {
+	background: #90a4ae;
+}
+
+.lien, .lien:active, .lien:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
 .circle {
 	border: 1px solid #999999;
 	width: 50px;
@@ -37,6 +46,11 @@ body {
 
 .grey {
 	background-color: #cfd8dc;
+}
+
+
+.center {
+	text-align: center;
 }
 
 /* === FIN CSS JULIA === */

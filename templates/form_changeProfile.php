@@ -1,6 +1,11 @@
 <?php $title = "Changement Profil"; ?>
 
-<?php ob_start() ?>
+
+<?php ob_start(); 
+
+
+var_dump($_SESSION);
+?>
 
     <div class="row">
         <div class="box">
@@ -19,7 +24,7 @@
 
 <!-- DIV pour affichage d'erreures -->
         <?php
-          if ($profileCreateErr)
+          if (!empty($profileCreateErr))
           {
             foreach ($profileCreateErr as $key => $value) 
             {
